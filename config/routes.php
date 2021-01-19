@@ -4,21 +4,26 @@ declare(strict_types = 1);
 
 use Hyperf\HttpServer\Router\Router;
 use Swoolecan\Baseapp\Helpers\SysOperation;
+use Swoolecan\Baseapp\Helpers\ResourceContainer;
+$resource = make(ResourceContainer::class);
 
-$middleware = [
-    //App\Middleware\JWTAuthMiddleware::class,
-    //App\Middleware\PermissionMiddleware::class,
+$middlewareAuth = [
+    App\Middleware\JWTAuthMiddleware::class,
 ];
+$middlewareBackend = array_merge($middlewareAuth, [
+    App\Middleware\BackendMiddleware::class,
+    App\Middleware\PermissionMiddleware::class,
+]);
 
-Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controllers\IndexController@index');
+//Router::get('/myinfo', 'App\Controllers\UserController@myinfo', ['middleware' => $middlewareAuth]);
+//Router::post('/refresh_token', 'App\Controllers\EntranceController@refreshToken', ['middleware' => $middlewareAuth]);
 
-Router::addGroup('/', function () {
-    $routes = SysOperation::initRouteDatas();
-    //print_R($routes);
+$routes = $resource->initRouteDatas();
+Router::addGroup('', function () use ($middlewareBackend, $routes) {
     foreach ($routes as $rCode => $rMethods) {
         foreach ($rMethods as $action => $data) {
-            echo $data['path'] . "\n";
-            Router::addRoute($data['method'], $data['path'], $data['callback']);
+            echo implode(',', $data['method']) . '==' . $data['path'] . '==' . $data['callback'] . "\n";
+            Router::addRoute($data['method'], $data['path'], $data['callback'], ['middleware' => $middlewareBackend, 'routeCode' => $data['code']]);
         }
     }
 });

@@ -17,7 +17,6 @@ return [
         ],
         'ignore_annotations' => [
             'mixin',
-            BASE_PATH . '/app/JsonRpc',
         ],
     ],
 ];
