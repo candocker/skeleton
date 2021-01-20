@@ -16,6 +16,9 @@ app/Middleware/CorsMiddleware.php
 app/Models/AbstractModel.php
 app/Repositories/AbstractRepository.php
 app/Requests/AbstractRequest.php
+app/Resources/AbstractResource.php
+app/Resources/AbstractCollection.php
+app/RpcServer/AbstractRpcServer.php
 app/Services/AbstractService.php
 bin/hyperf.php
 build.properties
