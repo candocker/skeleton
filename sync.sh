@@ -13,6 +13,8 @@ app/Controllers/AbstractController.php
 app/Controllers/IndexController.php
 app/Helpers/Function.php
 app/Middleware/CorsMiddleware.php
+app/Middleware/MerchantMiddleware.php
+app/Middleware/PermissionMiddleware.php
 app/Models/AbstractModel.php
 app/Repositories/AbstractRepository.php
 app/Requests/AbstractRequest.php
@@ -24,6 +26,7 @@ bin/hyperf.php
 build.properties
 build.xml
 composer.json
+config/.gitignore
 config/autoload/aliyun_acm.php
 config/autoload/amqp.php
 config/autoload/annotations.php
@@ -35,6 +38,7 @@ config/autoload/databases.php
 config/autoload/dependencies.php
 config/autoload/devtool.php
 config/autoload/exceptions.php
+config/autoload/jwt.php
 config/autoload/listeners.php
 config/autoload/logger.php
 config/autoload/middlewares.php
@@ -42,6 +46,7 @@ config/autoload/opentracing.php
 config/autoload/processes.php
 config/autoload/redis.php
 config/autoload/server.php
+config/autoload/services.php
 config/autoload/translation.php
 config/config.php
 config/container.php
